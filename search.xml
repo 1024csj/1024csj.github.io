@@ -4,7 +4,26 @@
   
     
     <entry>
-      <title>Hello World</title>
+      <title>java</title>
+      <link href="/2022/10/27/java/"/>
+      <url>/2022/10/27/java/</url>
+      
+        <content type="html"><![CDATA[<p>以下内容仅用来测试</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo 如何新建上传 日志</title>
       <link href="/2022/10/27/hello-world/"/>
       <url>/2022/10/27/hello-world/</url>
       

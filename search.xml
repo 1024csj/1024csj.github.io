@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>HashCode算法</title>
+      <link href="/2022/11/15/HashCode%E7%AE%97%E6%B3%95/"/>
+      <url>/2022/11/15/HashCode%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>查看</p><span id="more"></span><h3 id="判断两个元素是否相同，"><a href="#判断两个元素是否相同，" class="headerlink" title="判断两个元素是否相同，"></a>判断两个元素是否相同，</h3><p>1.调用hashCode，判断两个元素的hashcod值<br>2.调用equals判断两个元素，返回的boolean值</p><p>条件满足，hashmap，hashset则视为两元素为同一对象<br>：：:<br>只要有一点为false，则视为两元素不为同一对象</p><hr><h3 id="2-关于第二点，两个对象的hashCode相同，它们并不一定相同"><a href="#2-关于第二点，两个对象的hashCode相同，它们并不一定相同" class="headerlink" title="2.关于第二点，两个对象的hashCode相同，它们并不一定相同"></a>2.关于第二点，两个对象的hashCode相同，它们并不一定相同</h3><p> 也就是说，不同对象的hashCode可能相同；假如两个Java对象A和B，A和B不相等（eqauls结果为false），<br>    但A和B的哈希码相等，将A和B都存入HashMap时会发生哈希冲突，也就是A和B存放在HashMap内部数组的位置索引相同这时HashMap会在该位置建立一个链接表，<br>    将A和B串起来放在该位置，显然，该情况不违反HashMap的使用原则，是允许的。！！！当然，哈希冲突越少越好，尽量采用好的哈希算法以避免哈希冲突。！！！</p><p> <em><strong>所以，Java对于eqauls方法和hashCode方法是这样规定的:</strong></em>    </p><p>　　1.如果两个对象相同，那么它们的hashCode值一定要相同；</p><pre><code> 2.如果两个对象的hashCode相同，它们并不一定相同（这里说的对象相同指的是用eqauls方法比较）。      如不按要求去做了，会发现相同的对象可以出现在Set集合中，同时，增加新元素的效率会大大下降。  3.equals()相等的两个对象，hashcode()一定相等；equals()不相等的两个对象，却并不能证明他们的hashcode()不相等。    换句话说，equals()方法不相等的两个对象，hashcode()有可能相等（我的理解是由于哈希码在生成的时候产生冲突造成的）。    反过来，hashcode()不等，一定能推出equals()也不等；hashcode()相等，equals()可能相等，也可能不等。  在object类中，hashcode()方法是本地方法，返回的是对象的地址值，而object类中的equals()方法比较的也是两个对象的地址值，如果equals()相等，说明两个对象地址值也相等，当然hashcode()也就相等了；在String类中，equals()返回的是两个对象内容的比较，当两个对象内容相等时，Hashcode()方法根据String类的重写代码的分析，也可知道hashcode()返回结果也会相等。以此类推，可以知道Integer、Double等封装类中经过重写的equals()和hashcode()方法也同样适合于这个原则。当然没有经过重写的类，在继承了object类的equals()和hashcode()方法后，也会遵守这个原则。</code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java高阶应用</title>
+      <link href="/2022/11/15/java%E9%AB%98%E9%98%B6%E5%BA%94%E7%94%A8/"/>
+      <url>/2022/11/15/java%E9%AB%98%E9%98%B6%E5%BA%94%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<p>查看</p><span id="more"></span><h4 id="1-集合框架–数组存储长度不固定，无法预估查v都的场景不再使用，因此提出集合框架解决该问题"><a href="#1-集合框架–数组存储长度不固定，无法预估查v都的场景不再使用，因此提出集合框架解决该问题" class="headerlink" title="1.集合框架–数组存储长度不固定，无法预估查v都的场景不再使用，因此提出集合框架解决该问题"></a>1.集合框架–数组存储长度不固定，无法预估查v都的场景不再使用，因此提出集合框架解决该问题</h4><p>1.1<br>（1）为了表示操作一堆数据而规定的一种统一的标准体系结构–可用于存储多个数据，摆脱了数组存储长度不可变的缺点<br>（2）java集合框架都对应存储在java.util包下</p><h4 id="1-2集合框架有一系列的类组成的，参考–（异常）"><a href="#1-2集合框架有一系列的类组成的，参考–（异常）" class="headerlink" title="1.2集合框架有一系列的类组成的，参考–（异常）"></a>1.2集合框架有一系列的类组成的，参考–（异常）</h4><h4 id="1-3-list-按照存入数据的顺序，对数据进行存储"><a href="#1-3-list-按照存入数据的顺序，对数据进行存储" class="headerlink" title="1.3 list-按照存入数据的顺序，对数据进行存储"></a>1.3 list-按照存入数据的顺序，对数据进行存储</h4><p>（1.3.1）对数组结构的升级，能够实现数组的功能，并且长度可变<br>（1.3.2）结构特点，存入元素按照存入顺序排列，可以存入相同的数据—（有序可重复）<br>（1.3.3）实现类-ArrayList&#x2F;LinkedLIst<br>#####（1.3.3.1）ArrayList–是一个底层采用了数组结构实现的List接口类(object类型的数组-对象数组)–{transient object[] elemenData}</p><pre><code>每次存满时会自己扩容 长度为 &#123; new length = length*1.5&#125; 最大长度限值为:integer-8；(原因在Arraylist最大值限度)存储的所在数据在内存空间上时连续的移除中间某个元素效率较低，末尾不受影响查找元素效率较高</code></pre><p>#####(1.3.3.2)&#x2F;linkdlist<br>    采用双向链表结构，实现的list接口</p><pre><code>/* * [prev-存储上一个内存地址]--头 * [item-用于存储数据信息]--身 * [next-用于存储下一个内存地址]--尾 * */    linkdlist 的每一个元素是一个Node&lt;e&gt;对象，存储数据--[没有扩容的概念--理论上可以无限扩容]    结构特征：采用了一个私有的静态内部类组成   存储空间不连续：(插入与删除最多只需要三个元素-效率较高)--(也导致查询效率不高)</code></pre><p>2.实用类–（包装类）（枚举类）（日期类）（字符串）<br>3.i&#x2F;o流<br>4.反射机制<br>5.多线程</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JAVA</title>
       <link href="/2022/11/11/JAVA-0/"/>
       <url>/2022/11/11/JAVA-0/</url>

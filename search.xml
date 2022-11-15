@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>ArrayList最大限度</title>
+      <link href="/2022/11/15/ArrayList%E6%9C%80%E5%A4%A7%E9%99%90%E5%BA%A6/"/>
+      <url>/2022/11/15/ArrayList%E6%9C%80%E5%A4%A7%E9%99%90%E5%BA%A6/</url>
+      
+        <content type="html"><![CDATA[<p>查看</p><span id="more"></span><p><strong>因为自己作为数组</strong><br>除了存储数据本身以外，还需要32 bytes的大小来存储对象头（object header）信息。Java每个对象都包含了对象头，HotSpot虚拟机中对象头的大小不会超过32 bytes，所以最大容量减8才不会溢出。</p><p>我们知道，Java对象在堆内存中的存储布局可以分为三部分：对象头（object header），实例数据（Instance Data）和对齐填充（Padding）。</p><p><strong>对象头包括:</strong></p><p>Mark Word：用于对象自身的运行时数据存储，如HashCode，GC分代年龄，锁状态标志，线程持有的锁，偏向线程ID和偏向时间戳等；<br>Klass Pointer：对象指向它类元数据的指针，JVM通过这个指针长度来确定对象是哪个类的实例。<br>数组长度（只有数组对象才有）：记录数组对象的长度。</p><p><strong>我们知道 8 int（整数） 就等于32 bytes（字节），所以减去对象头大小的32 bytes来源于：</strong></p><p>32 bytes &#x3D; 8 bytes（Mark Word的最大占用） + 8 bytes（Klass Pointer的最大占用）+ 4 bytes（数组长度）+ 8 bytes（引用指针的最大占用：数组中存放的是对象的引用）</p><ul><li>4 bytes（padding：为了方便寻址，JVM要求对象大小要求是8的倍数，不够就填充）</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HashCode算法</title>
       <link href="/2022/11/15/HashCode%E7%AE%97%E6%B3%95/"/>
       <url>/2022/11/15/HashCode%E7%AE%97%E6%B3%95/</url>
